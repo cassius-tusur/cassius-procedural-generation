@@ -1,7 +1,9 @@
 using System.Text.Json;
+using BaseClasses.Enum;
 using BaseClasses.Model;
 using BaseClasses.Interface;
 using BaseClasses.Model.Params;
+using BaseClasses.Services.Binds;
 using static ProceduralGenerator.GenerationMethods;
 
 namespace ProceduralGenerator;
@@ -102,6 +104,10 @@ public class ProceduralGenerator : IGenerator
         var json = File.ReadAllText(optionsPath);
         var options = JsonDocument.Parse(json);
         var rootElement = options.RootElement;
+        if (rootElement.TryGetProperty("proceduralSettings", out var settingsElement))
+        {
+            rootElement = settingsElement;
+        }
         
         if (rootElement.TryGetProperty("traits", out var traitsElement))
         {
@@ -129,24 +135,31 @@ public class ProceduralGenerator : IGenerator
     private static Dictionary<string, List<string>> ParseTraits(JsonElement traitsElement)
     {
         var output = new Dictionary<string, List<string>>();
-        foreach (var traitElement in traitsElement.EnumerateObject())
-        {
-            var traitName = traitElement.Name;
-            var traitDescriptions = traitElement.Value;
+        var traitElements = traitsElement.ValueKind == JsonValueKind.Array
+            ? traitsElement.EnumerateArray().ToArray()
+            : new[] { traitsElement };
 
-            var traitValue = new List<string>();
-            foreach (var desc in traitDescriptions.EnumerateArray())
+        foreach (var traitGroup in traitElements)
+        {
+            foreach (var traitElement in traitGroup.EnumerateObject())
             {
-                var descString = desc.GetString();
-                if (!string.IsNullOrEmpty(descString))
+                var traitName = traitElement.Name;
+                var traitDescriptions = traitElement.Value;
+
+                var traitValue = new List<string>();
+                foreach (var desc in traitDescriptions.EnumerateArray())
                 {
-                    traitValue.Add(descString);
+                    var descString = desc.GetString();
+                    if (!string.IsNullOrEmpty(descString))
+                    {
+                        traitValue.Add(descString);
+                    }
                 }
-            }
             
-            if (traitValue.Count > 0)
-            {
-                output.Add(traitName, traitValue);
+                if (traitValue.Count > 0)
+                {
+                    output.Add(traitName, traitValue);
+                }
             }
         }
 
@@ -409,7 +422,9 @@ public class ProceduralGenerator : IGenerator
 
     private static Dictionary<string, object> BuildTrait(Dictionary<string, List<string>> possibleTraits, string traitKey)
     {
-        var descriptions = possibleTraits[traitKey];
+        var normalizedKey = possibleTraits.Keys.FirstOrDefault(key =>
+            string.Equals(key, traitKey, StringComparison.OrdinalIgnoreCase)) ?? traitKey;
+        var descriptions = possibleTraits[normalizedKey];
         var description = descriptions.Count > 0 ? descriptions[Random.Next(descriptions.Count)] : string.Empty;
         
         return new Dictionary<string, object>()
@@ -494,16 +509,24 @@ public class ProceduralGenerator : IGenerator
     private static List<IElement> GetParents(Plot plot, IElement child)
     {
         var parents = plot.Relations.Where(x => Equals(x.Target, child) &&
-                                                x.Param.Name.ToLower() == "child")
+                                                x.Param.Equals(BaseRelationKeys.Child) &&
+                                                x.Value is true)
             .Select(x => x.Source)
             .ToList();
 
-        return parents.Count switch
+        var result = parents.Count switch
         {
             < 2 => throw new ArgumentException("Character doesn't have one or both parent elements"),
             > 2 => throw new ArgumentException("Character have more than two parent elements"),
             _ => parents
         };
+
+        if (result.Any(parent => parent.Type != ElemType.Character))
+        {
+            throw new ArgumentException("Parent elements must be Characters.");
+        }
+
+        return result;
     }
 
     private List<Dictionary<string, object>> GetParentsTraits(Plot plot, IElement child)
