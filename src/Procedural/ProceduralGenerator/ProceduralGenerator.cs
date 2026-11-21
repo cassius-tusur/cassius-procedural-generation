@@ -508,10 +508,10 @@ public class ProceduralGenerator : IGenerator
     
     private static List<IElement> GetParents(Plot plot, IElement child)
     {
-        var parents = plot.Relations.Where(x => Equals(x.Target, child) &&
+        var parents = plot.Relations.Where(x => Equals(x.Source, child) &&
                                                 x.Param.Equals(BaseRelationKeys.Child) &&
                                                 x.Value is true)
-            .Select(x => x.Source)
+            .Select(x => x.Target)
             .ToList();
 
         var result = parents.Count switch

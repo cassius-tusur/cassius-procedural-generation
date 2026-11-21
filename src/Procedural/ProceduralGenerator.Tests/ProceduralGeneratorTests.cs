@@ -43,8 +43,8 @@ public sealed class ProceduralGeneratorTests
             var secondParent = Parent("calm");
             var child = new Element(ElemType.Character);
             Add(plot, firstParent, secondParent, child);
-            plot.Relations.Add(new Relation(firstParent, child, BaseRelationKeys.Child, true));
-            plot.Relations.Add(new Relation(secondParent, child, BaseRelationKeys.Child, true));
+            plot.Bind(firstParent, child, BaseRelationKeys.Parent, true);
+            plot.Bind(secondParent, child, BaseRelationKeys.Parent, true);
 
             generator.Generate(plot, child);
 
@@ -64,7 +64,7 @@ public sealed class ProceduralGeneratorTests
             var parent = Parent("brave");
             var child = new Element(ElemType.Character);
             Add(plot, parent, child);
-            plot.Relations.Add(new Relation(parent, child, BaseRelationKeys.Child, true));
+            plot.Bind(parent, child, BaseRelationKeys.Parent, true);
 
             var exception = Assert.Throws<ArgumentException>(() => generator.Generate(plot, child));
 
@@ -84,9 +84,9 @@ public sealed class ProceduralGeneratorTests
             var extraParent = Parent("brave");
             var child = new Element(ElemType.Character);
             Add(plot, firstParent, secondParent, extraParent, child);
-            plot.Relations.Add(new Relation(firstParent, child, BaseRelationKeys.Child, true));
-            plot.Relations.Add(new Relation(secondParent, child, BaseRelationKeys.Child, true));
-            plot.Relations.Add(new Relation(extraParent, child, BaseRelationKeys.Child, true));
+            plot.Bind(firstParent, child, BaseRelationKeys.Parent, true);
+            plot.Bind(secondParent, child, BaseRelationKeys.Parent, true);
+            plot.Bind(extraParent, child, BaseRelationKeys.Parent, true);
 
             var exception = Assert.Throws<ArgumentException>(() => generator.Generate(plot, child));
 
@@ -105,8 +105,8 @@ public sealed class ProceduralGeneratorTests
             var itemParent = Parent("calm", ElemType.Item);
             var child = new Element(ElemType.Character);
             Add(plot, characterParent, itemParent, child);
-            plot.Relations.Add(new Relation(characterParent, child, BaseRelationKeys.Child, true));
-            plot.Relations.Add(new Relation(itemParent, child, BaseRelationKeys.Child, true));
+            plot.Bind(characterParent, child, BaseRelationKeys.Parent, true);
+            plot.Bind(child, itemParent, BaseRelationKeys.Child, true);
 
             var exception = Assert.Throws<ArgumentException>(() => generator.Generate(plot, child));
 
@@ -126,8 +126,8 @@ public sealed class ProceduralGeneratorTests
             var child = new Element(ElemType.Character);
             Add(plot, firstParent, secondParent, child);
             var lookAlikeKey = new ParamKey<bool>("Child", "Other");
-            plot.Relations.Add(new Relation(firstParent, child, lookAlikeKey, true));
-            plot.Relations.Add(new Relation(secondParent, child, lookAlikeKey, true));
+            plot.Bind(child, firstParent, lookAlikeKey, true);
+            plot.Bind(child, secondParent, lookAlikeKey, true);
 
             var exception = Assert.Throws<ArgumentException>(() => generator.Generate(plot, child));
 
@@ -146,8 +146,8 @@ public sealed class ProceduralGeneratorTests
             var secondParent = Parent("calm");
             var child = new Element(ElemType.Character);
             Add(plot, firstParent, secondParent, child);
-            plot.Relations.Add(new Relation(firstParent, child, BaseRelationKeys.Child, false));
-            plot.Relations.Add(new Relation(secondParent, child, BaseRelationKeys.Child, false));
+            plot.Bind(firstParent, child, BaseRelationKeys.Parent, false);
+            plot.Bind(secondParent, child, BaseRelationKeys.Parent, false);
 
             var exception = Assert.Throws<ArgumentException>(() => generator.Generate(plot, child));
 
