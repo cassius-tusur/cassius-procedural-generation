@@ -18,11 +18,10 @@ namespace LocationGenerator.Tests.Support
 
         public IElement MissingLocation() => new Element(ElemType.Location);
 
-        public IElement InjectDuplicateIdLocation(Guid id)
+        public bool InjectDuplicateIdLocation(Guid id)
         {
             var duplicate = new FixedIdElement(id, ElemType.Location);
-            Plot.Elements.Add(duplicate);
-            return duplicate;
+            return Plot.Elements.Add(duplicate);
         }
 
         public void Contains(IElement source, IElement target, bool active = true) =>
