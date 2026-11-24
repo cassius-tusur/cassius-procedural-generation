@@ -106,7 +106,7 @@ public sealed class ProceduralGeneratorTests
             var child = new Element(ElemType.Character);
             Add(plot, characterParent, itemParent, child);
             plot.Bind(characterParent, child, BaseRelationKeys.Parent, true);
-            plot.Bind(child, itemParent, BaseRelationKeys.Child, true);
+            plot.Relations.Add(new Relation(child, itemParent, BaseRelationKeys.Child, true));
 
             var exception = Assert.Throws<ArgumentException>(() => generator.Generate(plot, child));
 
