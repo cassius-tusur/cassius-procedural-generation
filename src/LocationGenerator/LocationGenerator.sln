@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationGenerator", "LocationGenerator.csproj", "{A1B2C3D4-E5F6-4789-ABCD-0123456789AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationGenerator.Tests", "..\LocationGenerator.Tests\LocationGenerator.Tests.csproj", "{B2C3D4E5-F6A7-4890-BCDE-1234567890BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationGenerator.Example", "..\LocationGenerator.Example\LocationGenerator.Example.csproj", "{92957F28-FE35-4344-8F1A-3A289829383F}"
+EndProject
+Global
+	GlobalSection(SolutionItems) = preProject
+		..\..\docs\location-generator-usage.md = ..\..\docs\location-generator-usage.md
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1B2C3D4-E5F6-4789-ABCD-0123456789AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-4789-ABCD-0123456789AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-4789-ABCD-0123456789AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-4789-ABCD-0123456789AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C3D4E5-F6A7-4890-BCDE-1234567890BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C3D4E5-F6A7-4890-BCDE-1234567890BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C3D4E5-F6A7-4890-BCDE-1234567890BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C3D4E5-F6A7-4890-BCDE-1234567890BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92957F28-FE35-4344-8F1A-3A289829383F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92957F28-FE35-4344-8F1A-3A289829383F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92957F28-FE35-4344-8F1A-3A289829383F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92957F28-FE35-4344-8F1A-3A289829383F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,23 @@
+{
+  "id": "DungeonFlatV1",
+  "biomes": ["crypt", "cavern"],
+  "sizes": ["small", "medium", "large"],
+  "densities": ["sparse", "normal", "dense"],
+  "preservations": ["ruined", "weathered", "intact"],
+  "densityByBiomeAndSize": [
+    { "biome": "crypt", "size": "small", "values": ["sparse", "normal"] },
+    { "biome": "crypt", "size": "medium", "values": ["normal", "dense"] },
+    { "biome": "crypt", "size": "large", "values": ["normal", "dense"] },
+    { "biome": "cavern", "size": "small", "values": ["sparse", "normal"] },
+    { "biome": "cavern", "size": "medium", "values": ["sparse", "normal", "dense"] },
+    { "biome": "cavern", "size": "large", "values": ["normal", "dense"] }
+  ],
+  "preservationByBiomeAndDensity": [
+    { "biome": "crypt", "density": "sparse", "values": ["ruined", "weathered"] },
+    { "biome": "crypt", "density": "normal", "values": ["weathered", "intact"] },
+    { "biome": "crypt", "density": "dense", "values": ["weathered", "intact"] },
+    { "biome": "cavern", "density": "sparse", "values": ["ruined", "weathered"] },
+    { "biome": "cavern", "density": "normal", "values": ["weathered", "intact"] },
+    { "biome": "cavern", "density": "dense", "values": ["intact"] }
+  ]
+}
