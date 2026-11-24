@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;netstandard2.1</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="9.0.9" />
+    <ProjectReference Include="../base/BaseClasses/BaseClasses.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="../LocationGenerator.Tests/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Content/LocationAttributes/DungeonFlatV1.json"
+             CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
