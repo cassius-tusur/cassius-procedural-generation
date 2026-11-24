@@ -113,7 +113,7 @@ namespace LocationGenerator.Tests.Generation
         }
 
         [Fact]
-        public void Inspect_UsesIdIdentityAndRejectsAmbiguousIdsInAffectedArea()
+        public void Inspect_UsesIdIdentityAndPreservesCanonicalElements()
         {
             var graph = new TopologyGraphFixture();
             var root = graph.Location();
@@ -126,8 +126,9 @@ namespace LocationGenerator.Tests.Generation
             root = duplicate.Location();
             child = duplicate.Location();
             duplicate.Contains(root, child);
-            duplicate.InjectDuplicateIdLocation(child.Id);
-            AssertGraphRejected(duplicate, root, LocationGenerationMode.Append);
+            Assert.False(duplicate.InjectDuplicateIdLocation(child.Id));
+            var duplicateScope = new LocationGraphInspector().Inspect(duplicate.Plot, root, LocationGenerationMode.Append);
+            Assert.Same(child, duplicateScope.ExistingLocations[child.Id]);
         }
 
         [Fact]

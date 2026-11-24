@@ -74,7 +74,7 @@ namespace LocationGenerator.Tests.Generation
             var plan = new LocationMutationPlan();
             plan.RemoveScope(scope);
 
-            Assert.Equal(new[] { child, grandchild }, plan.RemovedLocations);
+            Assert.Equal(new[] { child, grandchild }.OrderBy(location => location.Id), plan.RemovedLocations);
             Assert.DoesNotContain(root, plan.RemovedLocations);
             Assert.DoesNotContain(unrelated, plan.RemovedLocations);
             Assert.DoesNotContain(foreignParent, plan.RemovedLocations);
