@@ -55,6 +55,32 @@ public sealed class ProceduralGeneratorTests
     }
 
     [Fact]
+    public void Generate_TwoParentsHalfRejectsIncompatibleCapitalizedInheritedTraits()
+    {
+        WithLegacySettings(settingsPath =>
+        {
+            var generator = new global::ProceduralGenerator.ProceduralGenerator(2, 0, settingsPath)
+                { GenerationMethod = GenerationMethods.TwoParentsHalf };
+            var plot = new Plot();
+            var firstParent = Parent("brave");
+            var secondParent = Parent("calm");
+            firstParent.Params.TryGet<List<Dictionary<string, object>>>(TraitsKey, out var firstTraits);
+            secondParent.Params.TryGet<List<Dictionary<string, object>>>(TraitsKey, out var secondTraits);
+            firstTraits!.Add(firstTraits[0]);
+            secondTraits!.Add(secondTraits[0]);
+            var child = new Element(ElemType.Character);
+            Add(plot, firstParent, secondParent, child);
+            plot.Bind(firstParent, child, BaseRelationKeys.Parent, true);
+            plot.Bind(secondParent, child, BaseRelationKeys.Parent, true);
+
+            generator.Generate(plot, child);
+
+            Assert.True(child.Params.TryGet<List<Dictionary<string, object>>>(TraitsKey, out var traits));
+            Assert.Single(traits);
+        });
+    }
+
+    [Fact]
     public void Generate_TwoParentsHalfRejectsMissingParents()
     {
         WithLegacySettings(settingsPath =>
@@ -192,7 +218,8 @@ public sealed class ProceduralGeneratorTests
               },
               "phobias": {
                 "dark": ["Dark description"]
-              }
+              },
+              "traitTable": [[1, 0], [0, 1]]
             }
             """);
         try

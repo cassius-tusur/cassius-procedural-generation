@@ -466,7 +466,8 @@ public class ProceduralGenerator : IGenerator
     {
         if (_traitTable == null) return true;
         
-        var newTraitIndex = _traitKeys.IndexOf(newTraitKey);
+        var newTraitIndex = _traitKeys.FindIndex(key =>
+            string.Equals(key, newTraitKey, StringComparison.OrdinalIgnoreCase));
         if (newTraitIndex == -1) return true;
         
         foreach (var trait in traitList)
@@ -474,8 +475,8 @@ public class ProceduralGenerator : IGenerator
             var existingTraitTitle = trait["Title"] as string;
             if (string.IsNullOrEmpty(existingTraitTitle)) continue;
             
-            var existingTraitKey = existingTraitTitle.ToLower();
-            var existingTraitIndex = _traitKeys.IndexOf(existingTraitKey);
+            var existingTraitIndex = _traitKeys.FindIndex(key =>
+                string.Equals(key, existingTraitTitle, StringComparison.OrdinalIgnoreCase));
             
             if (existingTraitIndex == -1) continue;
             
