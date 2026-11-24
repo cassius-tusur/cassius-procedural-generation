@@ -509,7 +509,7 @@ public class ProceduralGenerator : IGenerator
     
     private static List<IElement> GetParents(Plot plot, IElement child)
     {
-        var parents = plot.Relations.Where(x => Equals(x.Source, child) &&
+        var parents = plot.Relations.Where(x => x.Source.Id == child.Id &&
                                                 x.Param.Equals(BaseRelationKeys.Child) &&
                                                 x.Value is true)
             .Select(x => x.Target)

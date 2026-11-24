@@ -7,7 +7,7 @@ Generated entries remain `Dictionary<string, object>` values containing
 `Title`, `Affection`, and `Description`.
 
 Two-parent generation reads active (`true`) `BaseRelationKeys.Child` relations
-whose target is the generated element. It requires exactly two parent elements,
+whose source is the generated element and target is a parent. It requires exactly two parent elements,
 and both must have `ElemType.Character`.
 
 Random selection continues to use `Random.Shared`; callers cannot provide a
