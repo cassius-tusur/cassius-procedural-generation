@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\base\BaseClasses\BaseClasses.csproj" />
+      <ProjectReference Include="../../../external/BaseClasses/src/base/BaseClasses/BaseClasses.csproj" />
     </ItemGroup>
 
 </Project>

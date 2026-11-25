@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\base\BaseClasses\BaseClasses.csproj" />
+    <ProjectReference Include="../../../external/BaseClasses/src/base/BaseClasses/BaseClasses.csproj" />
     <ProjectReference Include="..\ProceduralGenerator\ProceduralGenerator.csproj" />
   </ItemGroup>
 
