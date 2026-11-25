@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProceduralGenerator", "ProceduralGenerator\ProceduralGenerator.csproj", "{84FAA2A0-E768-4E5D-8D57-55E08B2A67F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseClasses", "..\..\external\BaseClasses\src\base\BaseClasses\BaseClasses.csproj", "{724FC632-4D54-4336-ADEB-B950500BB574}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseClasses", "..\external\BaseClasses\src\BaseClasses\BaseClasses.csproj", "{724FC632-4D54-4336-ADEB-B950500BB574}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProceduralGenerator.Tests", "ProceduralGenerator.Tests\ProceduralGenerator.Tests.csproj", "{C3BDEAD0-4DA3-4983-9CEF-DAE1B2920F46}"
 EndProject

@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="../../../external/BaseClasses/src/base/BaseClasses/BaseClasses.csproj" />
+      <ProjectReference Include="../../external/BaseClasses/src/BaseClasses/BaseClasses.csproj" />
     </ItemGroup>
 
 </Project>
